@@ -5,22 +5,20 @@ FROM ubuntu:latest
 LABEL maintainer="higoranjos02@gmail.com"
 
 # Executa os comandos para atualizar o sistema, instalar as dependências e limpar o cache
-RUN sudo apt update && sudo apt upgrade -y \
+RUN apt update && apt upgrade -y && apt install -y \
     clang \
     llvm \
     cmake \
     make \
     git \
-    qt6-base-dev \
-    qt6-tools-dev \
-    qt6-qmake \
+    curl \
     build-essential \
     && apt clean
 
 # Define o diretório da aplicação
-WORKDIR /src
+WORKDIR /workspace
 
 # Copia todos os arquivos dentro da pasta "/src" para dentro do container
-COPY . .
+COPY . /workspace
 
-CMD ["bash"]
+CMD ["/bin/bash"]
